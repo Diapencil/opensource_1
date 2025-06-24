@@ -5,11 +5,52 @@
 - `$ top`
 - 서버의 OS 상태를 확인하는 명령어
 - 서버의 프로세스 상태, CPU 사용량, 메모리 사용량 등을 알 수 있음
+- 기본 3초 간격으로 새로고침
 - Git Bash 에서는 사용 불가
-- 요약
+- ### 요약
   - top: 시스템 현재 시간(GMT), OS가 살아있는 시간, 유저 세션수
-  - Load average: CPU Load의 이동 평균 (1분/5분/15분)
-  - Tasks: 현재 프로세스들의 상태 (running/sleeping/stopped/zombie)
-  - %Cpu(s): CPU의 사용률(%) (us/sy/ni/id/wa/hi/si/st)
-  - KiB Mem:
-  - KiB Swap:
+  - Load average: CPU Load의 이동 평균 (1분 / 5분 / 15분)
+  - Tasks: 현재 프로세스들의 상태
+    - total: 전체 프로세스
+    - running: CPU에 명령어가 실행중인 프로세스
+    - sleeping: CPU의 명령어 실행을 기다리는 프로세스
+    - stopped: 종료된 프로세스
+    - zombie: 좀비 상태의 프로세스
+  - %Cpu(s): CPU의 사용률(%)
+    - us: 유저 영역
+    - sy: 커널 영역
+    - ni: 우선순위 설정에 사용
+    - id: 사용하지 않는 비율
+    - wa: 대기
+    - hi: 하드웨어 인터럽트
+    - si: 소프트웨어 인터럽트
+    - st: VM에서 사용하여 대기
+  - KiB Mem / KiB Swap: RAM의 메모리 영역 / Swap 메모리 영역
+    - total: 총 메모리 양
+    - free: 사용 가능한 메모리 양
+    - used: 사용 중인 메모리 양
+    - buff/cache: IO 관련 버퍼에 사용되는 메모리 양
+    - avail Mem: swap 메모리를 쓰지 않고 사용 가능한 메모리 양
+- ### 디테일
+  - 각 프로세스에 대한 상세 정보
+  - PID: 프로세스 ID
+  - USER: 해당 프로세스를 실행한 USER 이름
+  - PR: 커널에 의한 우선순위
+  - NI: nice값
+  - VIRT: 프로세스가 소비하는 총 메모리
+  - RES: RAM에서 사용중인 메모리
+  - SHR: 다른 프로세스와의 공유 메모리
+  - %MEM: RAM에서 RES가 차지하는 비율
+  - S: 프로세스의 현재 상태
+  - TIME+: 프로세스가 사용한 토탈 CPU 시간
+  - COMMAND: 해당 프로세스를 실행한 커맨드
+- `$ top -b`: 순간 정보 확인 (batch 모드)
+- `$ top -n`: top 실행 주기 설정
+- 실행 후 명령
+  - 1: CPU 코어별 사용 현황
+  - P: CPU 사용률 기준 정렬
+  - M: 메모리 사용률 기준 정렬
+  - N: 프로세스 ID 기준 정렬
+  - T: 프로세스가 돌아가는 시간 순 정렬
+  - H: Tasks 기준을 thread로 변경
+  - K: 프로세스 종료 (kill)
